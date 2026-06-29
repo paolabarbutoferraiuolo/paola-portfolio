@@ -834,7 +834,7 @@ export function Works() {
       </div>
 
       <div className="max-w-5xl mx-auto relative">
-        <div className="text-center mb-12 sm:mb-16 pt-20 sm:pt-28">
+        <div className="text-center mb-12 sm:mb-16 pt-24 sm:pt-36">
           <div className="text-xs tracking-[0.3em] uppercase text-cream mb-4" style={{ textShadow: "0 1px 6px oklch(0.3 0.1 25 / 0.45)" }}>Works</div>
           <h2 className="font-serif text-4xl sm:text-5xl text-cream" style={{ textShadow: "0 2px 12px oklch(0.28 0.12 25 / 0.5)" }}>Choose a project</h2>
           <p className="mt-4 text-cream/90 text-sm" style={{ textShadow: "0 1px 6px oklch(0.3 0.1 25 / 0.45)" }}>tap a drink — each one opens a case study</p>
