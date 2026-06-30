@@ -43,7 +43,9 @@ const projects: Project[] = [
       "Launch posts, carousels, stories and reels covers — all reusable as a brand pattern for future cohorts.",
     reflection:
       "Showed how a tiny illustrated system can carry a whole event narrative with very little overhead.",
+    image: academy2026.url,
   },
+
   {
     id: "matcha-latte",
     drink: "Matcha Latte",
