@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Petals } from "./Petals";
+import academy2026 from "@/assets/academy-2026.png.asset.json";
 
 type Project = {
   id: string;
@@ -16,7 +17,9 @@ type Project = {
   process: string;
   output: string;
   reflection: string;
+  image?: string;
 };
+
 
 const projects: Project[] = [
   {
@@ -40,7 +43,9 @@ const projects: Project[] = [
       "Launch posts, carousels, stories and reels covers — all reusable as a brand pattern for future cohorts.",
     reflection:
       "Showed how a tiny illustrated system can carry a whole event narrative with very little overhead.",
+    image: academy2026.url,
   },
+
   {
     id: "matcha-latte",
     drink: "Matcha Latte",
@@ -232,9 +237,19 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
         <div className="px-6 sm:px-10 py-8 space-y-8">
           <p className="text-ink/80 leading-relaxed text-lg font-serif italic">{p.description}</p>
 
-          <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sakura-soft to-cream border border-border/50 flex items-center justify-center text-ink/40 text-sm">
-            project visuals — placeholder
-          </div>
+          {p.image ? (
+            <img
+              src={p.image}
+              alt={`${p.title} — project visual`}
+              className="w-full aspect-[16/9] object-cover rounded-2xl border border-border/50"
+              loading="lazy"
+            />
+          ) : (
+            <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sakura-soft to-cream border border-border/50 flex items-center justify-center text-ink/40 text-sm">
+              project visuals — placeholder
+            </div>
+          )}
+
 
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Role" value={p.role} />
