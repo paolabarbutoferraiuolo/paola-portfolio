@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Petals } from "./Petals";
-import academy2026 from "@/assets/academy-2026.png.asset.json";
+import academy2026 from "@/assets/academy-2026.png";
 
 type Project = {
   id: string;
