@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Petals } from "./Petals";
+import academy2026 from "@/assets/academy-2026.png.asset.json";
 
 type Project = {
   id: string;
@@ -16,7 +17,9 @@ type Project = {
   process: string;
   output: string;
   reflection: string;
+  image?: string;
 };
+
 
 const projects: Project[] = [
   {
