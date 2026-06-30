@@ -238,12 +238,14 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
           <p className="text-ink/80 leading-relaxed text-lg font-serif italic">{p.description}</p>
 
           {p.image ? (
-            <img
-              src={p.image}
-              alt={`${p.title} — project visual`}
-              className="w-full aspect-[16/9] object-cover rounded-2xl border border-border/50"
-              loading="lazy"
-            />
+            <div className="w-full rounded-2xl border border-border/50 bg-muted/40 flex items-center justify-center overflow-hidden">
+              <img
+                src={p.image}
+                alt={`${p.title} — project visual`}
+                className="w-full h-auto max-h-[60vh] object-contain"
+                loading="lazy"
+              />
+            </div>
           ) : (
             <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sakura-soft to-cream border border-border/50 flex items-center justify-center text-ink/40 text-sm">
               project visuals — placeholder
