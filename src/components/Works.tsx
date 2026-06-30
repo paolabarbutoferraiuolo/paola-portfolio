@@ -237,9 +237,19 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
         <div className="px-6 sm:px-10 py-8 space-y-8">
           <p className="text-ink/80 leading-relaxed text-lg font-serif italic">{p.description}</p>
 
-          <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sakura-soft to-cream border border-border/50 flex items-center justify-center text-ink/40 text-sm">
-            project visuals — placeholder
-          </div>
+          {p.image ? (
+            <img
+              src={p.image}
+              alt={`${p.title} — project visual`}
+              className="w-full aspect-[16/9] object-cover rounded-2xl border border-border/50"
+              loading="lazy"
+            />
+          ) : (
+            <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sakura-soft to-cream border border-border/50 flex items-center justify-center text-ink/40 text-sm">
+              project visuals — placeholder
+            </div>
+          )}
+
 
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Role" value={p.role} />
