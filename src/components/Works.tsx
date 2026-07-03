@@ -265,19 +265,19 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
           <Block label="Challenge" text={p.challenge} />
           <Block label="Process" text={p.process} />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-3 gap-3">
             {[0, 1, 2].map((i) => {
               const src = p.gallery?.[i];
               return (
                 <div
                   key={i}
-                  className="aspect-square rounded-xl bg-background border border-border/40 overflow-hidden flex items-center justify-center text-[10px] text-ink/40"
+                  className="aspect-square rounded-xl bg-sakura-soft/60 border border-border/40 overflow-hidden flex items-center justify-center text-[10px] text-ink/40"
                 >
                   {src ? (
                     <img
                       src={src}
                       alt={`${p.title} — visual ${i + 1}`}
-                      className="w-full h-full object-contain p-1.5 block"
+                      className="w-full h-full object-contain p-2"
                       loading="lazy"
                     />
                   ) : (
