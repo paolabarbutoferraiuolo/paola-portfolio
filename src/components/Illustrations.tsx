@@ -84,8 +84,9 @@ export function Illustrations() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 text-base sm:text-lg text-ink/70 max-w-2xl mx-auto leading-relaxed">
-              A personal Instagram corner for doodles, studies and everyday
-              visual notes. Tap any post to open it on Instagram.
+              A personal Instagram corner for doodles, illustrations and everyday motivational quotes.
+              <br />
+              Tap any post to open it on Instagram.
             </p>
           </Reveal>
         </div>
