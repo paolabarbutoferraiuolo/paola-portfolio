@@ -4,6 +4,7 @@ import { About } from "@/components/About";
 import { Services } from "@/components/Services";
 import { Journey } from "@/components/Journey";
 import { Works } from "@/components/Works";
+import { Illustrations } from "@/components/Illustrations";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
@@ -16,6 +17,7 @@ export default function App() {
       <Services />
       <Journey />
       <Works />
+      <Illustrations />
       <Contact />
       <Footer />
     </main>

@@ -34,7 +34,14 @@ export function Contact() {
           <span className="hidden sm:inline text-ink/30">·</span>
           <a href="#" className="underline-grow hover:text-sakura-deep transition-colors">LinkedIn</a>
           <span className="hidden sm:inline text-ink/30">·</span>
-          <a href="#" className="underline-grow hover:text-sakura-deep transition-colors">Instagram</a>
+          <a
+            href="https://www.instagram.com/mrsmushroometti/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-grow hover:text-sakura-deep transition-colors"
+          >
+            Instagram
+          </a>
           <span className="hidden sm:inline text-ink/30">·</span>
           <a href="#" className="underline-grow hover:text-sakura-deep transition-colors">Behance</a>
         </div>
