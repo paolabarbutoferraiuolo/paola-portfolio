@@ -266,14 +266,26 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
           <Block label="Process" text={p.process} />
 
           <div className="grid grid-cols-3 gap-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-xl bg-sakura-soft/60 border border-border/40 flex items-center justify-center text-[10px] text-ink/40"
-              >
-                image {i}
-              </div>
-            ))}
+            {[0, 1, 2].map((i) => {
+              const src = p.gallery?.[i];
+              return (
+                <div
+                  key={i}
+                  className="aspect-square rounded-xl bg-sakura-soft/60 border border-border/40 overflow-hidden flex items-center justify-center text-[10px] text-ink/40"
+                >
+                  {src ? (
+                    <img
+                      src={src}
+                      alt={`${p.title} — visual ${i + 1}`}
+                      className="w-full h-full object-contain p-2"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span>image {i + 1}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <Block label="Final output" text={p.output} />
