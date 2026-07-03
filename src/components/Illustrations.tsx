@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 import { Reveal } from "./Reveal";
-import { supabase } from "@/integrations/supabase/client";
 
 const INSTAGRAM_URL = "https://www.instagram.com/mrsmushroometti/";
 
-type IgItem = {
-  id: string;
-  permalink: string;
+type IgPost = {
+  image: string;
   caption: string;
-  imageUrl: string;
-  mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  permalink: string;
 };
 
-// Fallback tiles used when the Instagram Graph API is not yet configured
-// or a request fails. Each tile still opens the profile.
+// Fallback tiles rendered while the JSON loads or if it is missing.
 const fallbackTiles = [
   { label: "Sketchbook", tint: "from-sakura-soft to-sakura" },
   { label: "Characters", tint: "from-cream to-mustard/60" },
@@ -22,37 +18,43 @@ const fallbackTiles = [
 ];
 
 export function Illustrations() {
-  const [items, setItems] = useState<IgItem[] | null>(null);
+  const [posts, setPosts] = useState<IgPost[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke(
-          "instagram-latest",
-          { body: {} },
-        );
+    // Respect Vite's base path so the fetch works on GitHub Pages subpaths.
+    const url = `${import.meta.env.BASE_URL}instagram-posts.json`;
+    fetch(url, { cache: "no-cache" })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data: unknown) => {
         if (cancelled) return;
-        if (error) throw error;
-        if (data?.configured && Array.isArray(data.data) && data.data.length) {
-          setItems(data.data as IgItem[]);
+        if (Array.isArray(data)) {
+          const clean = data
+            .filter(
+              (p): p is IgPost =>
+                !!p &&
+                typeof (p as IgPost).image === "string" &&
+                typeof (p as IgPost).permalink === "string",
+            )
+            .slice(0, 4);
+          setPosts(clean);
         } else {
-          setItems([]); // triggers fallback rendering
+          setPosts([]);
         }
-      } catch (e) {
-        console.warn("instagram-latest fetch failed", e);
-        if (!cancelled) setItems([]);
-      } finally {
+      })
+      .catch(() => {
+        if (!cancelled) setPosts([]);
+      })
+      .finally(() => {
         if (!cancelled) setLoading(false);
-      }
-    })();
+      });
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const showReal = !!items && items.length > 0;
+  const showReal = !!posts && posts.length > 0;
 
   return (
     <section
@@ -64,7 +66,7 @@ export function Illustrations() {
           <Reveal>
             <div className="flex items-center justify-center gap-3 text-sakura-deep mb-6 text-xs tracking-[0.3em] uppercase">
               <span className="h-px w-8 bg-sakura-deep" />
-              Illustrations
+              Instagram Highlights
               <span className="h-px w-8 bg-sakura-deep" />
             </div>
           </Reveal>
@@ -88,23 +90,23 @@ export function Illustrations() {
         <Reveal delay={220}>
           <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
             {showReal
-              ? items!.map((item, i) => (
+              ? posts!.map((post, i) => (
                   <a
-                    key={item.id}
-                    href={item.permalink || INSTAGRAM_URL}
+                    key={post.permalink + i}
+                    href={post.permalink || INSTAGRAM_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={
-                      item.caption
-                        ? `Instagram post: ${item.caption.slice(0, 80)}`
+                      post.caption
+                        ? `Instagram post: ${post.caption.slice(0, 80)}`
                         : "Latest Instagram post"
                     }
                     className="group relative aspect-square overflow-hidden rounded-2xl bg-cream soft-shadow hover-lift"
                     style={{ transitionDelay: `${i * 40}ms` }}
                   >
                     <img
-                      src={item.imageUrl}
-                      alt={item.caption?.slice(0, 120) || "Illustration"}
+                      src={post.image}
+                      alt={post.caption?.slice(0, 120) || "Illustration"}
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
