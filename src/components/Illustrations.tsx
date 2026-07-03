@@ -35,7 +35,11 @@ export function Illustrations() {
               (p): p is IgPost =>
                 !!p &&
                 typeof (p as IgPost).image === "string" &&
-                typeof (p as IgPost).permalink === "string",
+                (p as IgPost).image.length > 0 &&
+                typeof (p as IgPost).permalink === "string" &&
+                /^https?:\/\/(www\.)?instagram\.com\//i.test(
+                  (p as IgPost).permalink,
+                ),
             )
             .slice(0, 4);
           setPosts(clean);
