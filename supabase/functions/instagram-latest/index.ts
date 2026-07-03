@@ -30,20 +30,36 @@ Deno.serve(async (req) => {
   try {
     const fields =
       "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
-    const url =
-      `https://graph.instagram.com/v21.0/${encodeURIComponent(userId)}/media` +
-      `?fields=${fields}&limit=4&access_token=${encodeURIComponent(token)}`;
+    const qs = `?fields=${fields}&limit=4&access_token=${encodeURIComponent(token)}`;
 
-    const res = await fetch(url);
-    const json = await res.json();
+    // Try both API hosts — tokens from "Instagram API with Instagram Login"
+    // work on graph.instagram.com; tokens from "Instagram API with Facebook
+    // Login" (Page-scoped) work on graph.facebook.com.
+    const hosts = [
+      `https://graph.instagram.com/v21.0/${encodeURIComponent(userId)}/media`,
+      `https://graph.facebook.com/v21.0/${encodeURIComponent(userId)}/media`,
+    ];
 
-    if (!res.ok) {
-      console.error("IG API error", res.status, json);
+    let json: any = null;
+    let ok = false;
+    let lastStatus = 0;
+    for (const base of hosts) {
+      const res = await fetch(base + qs);
+      json = await res.json();
+      lastStatus = res.status;
+      if (res.ok && Array.isArray(json?.data)) {
+        ok = true;
+        break;
+      }
+      console.warn("IG host failed", base, res.status, json?.error?.message);
+    }
+
+    if (!ok) {
       return new Response(
         JSON.stringify({
           configured: true,
           data: [],
-          error: json?.error?.message ?? `HTTP ${res.status}`,
+          error: json?.error?.message ?? `HTTP ${lastStatus}`,
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -51,6 +67,7 @@ Deno.serve(async (req) => {
         },
       );
     }
+
 
     const items = Array.isArray(json?.data) ? json.data : [];
     const normalized = items.slice(0, 4).map((m: any) => ({
