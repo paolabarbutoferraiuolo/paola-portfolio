@@ -12,8 +12,17 @@ export function Footer() {
             Paola Barbuto Ferraiuolo — Visual Communication &amp; Content Designer
           </span>
         </div>
-        <div className="text-xs text-ink/40 tracking-wider">
-          © {new Date().getFullYear()} · made with care
+        <div className="flex items-center gap-6 text-xs text-ink/40 tracking-wider">
+          <a
+            href="https://www.instagram.com/mrsmushroometti/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-sakura-deep transition-colors"
+          >
+            Instagram
+          </a>
+          <span className="text-ink/30">·</span>
+          <span>© {new Date().getFullYear()} · made with care</span>
         </div>
       </div>
     </footer>
