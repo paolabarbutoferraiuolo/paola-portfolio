@@ -265,7 +265,7 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
           <Block label="Challenge" text={p.challenge} />
           <Block label="Process" text={p.process} />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {[0, 1, 2].map((i) => {
               const src = p.gallery?.[i];
               return (
@@ -277,7 +277,7 @@ function ProjectModal({ p, onClose }: { p: Project; onClose: () => void }) {
                     <img
                       src={src}
                       alt={`${p.title} — visual ${i + 1}`}
-                      className="w-full h-full object-contain p-2 block"
+                      className="w-full h-full object-contain p-1.5 block"
                       loading="lazy"
                     />
                   ) : (
