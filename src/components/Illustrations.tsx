@@ -114,7 +114,8 @@ export function Illustrations() {
                       src={post.image}
                       alt={post.caption?.slice(0, 120) || "Illustration"}
                       loading="lazy"
-                      className={`absolute inset-0 w-full h-full object-center transition-transform duration-500 group-hover:scale-105 ${post.fit === "cover" ? "object-cover" : "object-contain p-2"}`}
+                      className={`absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 ${post.fit === "cover" ? "object-cover object-center" : "object-contain object-center p-2"}`}
+                      style={{ objectPosition: "center" }}
                     />
                     <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                       {post.caption ? (
