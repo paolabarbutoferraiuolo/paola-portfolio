@@ -19,6 +19,7 @@ type Project = {
   output: string;
   reflection: string;
   image?: string;
+  gallery?: string[];
 };
 
 
