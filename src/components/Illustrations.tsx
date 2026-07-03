@@ -97,13 +97,13 @@ export function Illustrations() {
               ? posts!.map((post, i) => (
                   <a
                     key={post.permalink + i}
-                    href={post.permalink || INSTAGRAM_URL}
+                    href={post.permalink}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={
                       post.caption
                         ? `Instagram post: ${post.caption.slice(0, 80)}`
-                        : "Latest Instagram post"
+                        : "Open Instagram post"
                     }
                     className="group relative aspect-square overflow-hidden rounded-2xl bg-cream soft-shadow hover-lift"
                     style={{ transitionDelay: `${i * 40}ms` }}
@@ -114,10 +114,16 @@ export function Illustrations() {
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-ink/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="text-warm-white text-xs tracking-wide inline-flex items-center gap-1">
-                        <InstagramIcon className="w-3.5 h-3.5" />
-                        View on Instagram
+                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      {post.caption ? (
+                        <p className="text-warm-white text-[11px] sm:text-xs leading-snug line-clamp-2 mb-1.5">
+                          {post.caption}
+                        </p>
+                      ) : null}
+                      <span className="text-warm-white/90 text-[11px] tracking-wide inline-flex items-center gap-1">
+                        <InstagramIcon className="w-3 h-3" />
+                        View post
+                        <span aria-hidden>→</span>
                       </span>
                     </div>
                   </a>
