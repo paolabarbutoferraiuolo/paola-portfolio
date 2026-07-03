@@ -46,6 +46,7 @@ const projects: Project[] = [
     reflection:
       "Showed how a tiny illustrated system can carry a whole event narrative with very little overhead.",
     image: academy2026,
+    gallery: [graduation2025],
   },
 
   {
