@@ -3,6 +3,7 @@ import { Petals } from "./Petals";
 import academy2026 from "@/assets/academy-2026.png";
 import graduation2025 from "@/assets/graduation-2025.png";
 import graduation2026_2 from "@/assets/graduation-2026-2.png";
+import graduation2026_3 from "@/assets/graduation-2026-3.png";
 
 
 type Project = {
@@ -48,7 +49,7 @@ const projects: Project[] = [
     reflection:
       "Showed how a tiny illustrated system can carry a whole event narrative with very little overhead.",
     image: academy2026,
-    gallery: [graduation2025, graduation2026_2],
+    gallery: [graduation2025, graduation2026_2, graduation2026_3],
   },
 
   {
