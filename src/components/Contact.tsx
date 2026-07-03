@@ -2,7 +2,7 @@ import { Petals } from "./Petals";
 
 export function Contact() {
   return (
-    <section id="contact" className="relative py-32 sm:py-40 px-6 gradient-sakura overflow-hidden">
+    <section id="contact" className="relative pt-16 sm:pt-20 lg:pt-24 pb-32 sm:pb-40 px-6 gradient-sakura overflow-hidden">
       <Petals count={10} opacity={0.55} />
       <div className="relative max-w-3xl mx-auto text-center">
         <div className="text-xs tracking-[0.3em] uppercase text-sakura-deep mb-6">Contact</div>
