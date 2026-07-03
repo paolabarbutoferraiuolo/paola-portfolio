@@ -7,6 +7,7 @@ type IgPost = {
   image: string;
   caption: string;
   permalink: string;
+  fit?: "cover" | "contain";
 };
 
 // Fallback tiles rendered while the JSON loads or if it is missing.
