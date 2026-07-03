@@ -7,6 +7,7 @@ type IgPost = {
   image: string;
   caption: string;
   permalink: string;
+  fit?: "cover" | "contain";
 };
 
 // Fallback tiles rendered while the JSON loads or if it is missing.
@@ -113,7 +114,7 @@ export function Illustrations() {
                       src={post.image}
                       alt={post.caption?.slice(0, 120) || "Illustration"}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={`absolute inset-0 w-full h-full ${post.fit === "contain" ? "object-contain p-2" : "object-cover"} object-center transition-transform duration-500 group-hover:scale-105`}
                     />
                     <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                       {post.caption ? (
